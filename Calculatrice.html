@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Calculatrice</title>
+    <style>
+      :root {
+        --bg: #0a71cc;
+        --panel: #0b1220;
+        --btn: #111827;
+        --btn-2: #0f1724;
+        --accent: #06b6d4;
+        --text: #e6eef6;
+        --op: #f59e0b;
+        --danger: #ef4444;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        background: linear-gradient(180deg, #071028 0%, #07131d 100%);
+        font-family: Inter, Segoe UI, Roboto, "Helvetica Neue", Arial;
+      }
+      .wrap {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+      }
+      .calc {
+        width: 360px;
+        background: linear-gradient(180deg, var(--panel), #08111b);
+        border-radius: 12px;
+        padding: 18px;
+        box-shadow: 0 10px 30px rgba(2, 6, 23, 0.6);
+      }
+      .screen {
+        height: 86px;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 8px;
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-end;
+        color: var(--text);
+        margin-bottom: 12px;
+        overflow: hidden;
+      }
+      .screen .history {
+        font-size: 13px;
+        opacity: 0.6;
+        align-self: flex-end;
+      }
+      .screen .current {
+        font-size: 28px;
+        font-weight: 600;
+      }
+      .keys {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+      }
+      button {
+        height: 56px;
+        border-radius: 8px;
+        border: 0;
+        background: var(--btn);
+        color: var(--text);
+        font-size: 18px;
+        cursor: pointer;
+        box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.2);
+      }
+      button.operator {
+        background: linear-gradient(180deg, var(--op), #d97706);
+        color: #07111a;
+        font-weight: 600;
+      }
+      button.equal {
+        grid-column: 4 / 5;
+        background: linear-gradient(180deg, #06b6d4, #0891b2);
+        color: #041921;
+        font-weight: 700;
+      }
+      button.wide {
+        grid-column: 1 / 3;
+      }
+      button.danger {
+        background: linear-gradient(180deg, #ef4444, #dc2626);
+        color: white;
+      }
+      @media (max-width: 380px) {
+        .calc {
+          width: 320px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="calc" role="application" aria-label="Calculatrice">
+        <div class="screen" id="screen">
+          <div class="history" id="history">&nbsp;</div>
+          <div class="current" id="current">0</div>
+        </div>
+        <div class="keys">
+          <button id="clear" class="danger">AC</button>
+          <button id="del">DEL</button>
+          <button class="operator" data-op="/">÷</button>
+          <button class="operator" data-op="*">×</button>
+
+          <button class="num">7</button>
+          <button class="num">8</button>
+          <button class="num">9</button>
+          <button class="operator" data-op="-">−</button>
+
+          <button class="num">4</button>
+          <button class="num">5</button>
+          <button class="num">6</button>
+          <button class="operator" data-op="+">+</button>
+
+          <button class="num">1</button>
+          <button class="num">2</button>
+          <button class="num">3</button>
+          <button class="equal" id="equals">=</button>
+
+          <button class="num wide">0</button>
+          <button class="num">.</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="calc.js"></script>
+  </body>
+</html>
