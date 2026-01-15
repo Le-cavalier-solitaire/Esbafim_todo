@@ -7,6 +7,7 @@
   const clearBtn = document.getElementById("clear");
   const delBtn = document.getElementById("del");
   const eqBtn = document.getElementById("equals");
+  const sqrtBtn = document.querySelector("button.sqrt");
 
   let current = "0";
   let previous = "";
@@ -106,6 +107,21 @@
     updateDisplay();
   }
 
+  function computeSqrt() {
+    const num = parseFloat(current);
+    if (isNaN(num)) return;
+    if (num < 0) {
+      current = "Erreur";
+    } else {
+      const result = Math.sqrt(num);
+      current = String(parseFloat(result.toFixed(12)).toString());
+    }
+    operator = null;
+    previous = "";
+    overwrite = true;
+    updateDisplay();
+  }
+
   // Attacher événements
   nums.forEach((b) =>
     b.addEventListener("click", (e) =>
@@ -118,6 +134,7 @@
   clearBtn.addEventListener("click", clearAll);
   delBtn.addEventListener("click", deleteLast);
   eqBtn.addEventListener("click", compute);
+  sqrtBtn.addEventListener("click", computeSqrt);
 
   // Support clavier
   window.addEventListener("keydown", (e) => {
@@ -129,6 +146,10 @@
       e.preventDefault();
       compute();
     } else if (["+", "-", "*", "/"].includes(e.key)) chooseOperator(e.key);
+    else if (e.key === "r" || e.key === "R") {
+      e.preventDefault();
+      computeSqrt();
+    }
   });
 
   // Initial render
